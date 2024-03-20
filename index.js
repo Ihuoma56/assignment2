@@ -1,5 +1,6 @@
 const http = require("http");
-
+const port = 5000;
+const hostname = "localhost"
 const action = (req, res) => {
     console.log(req.method);
     console.log(req.url);
@@ -21,6 +22,9 @@ const action = (req, res) => {
     }
     if (req.method === "PUT" && req.url === "/books/author/") {
         res.write("Oh fantastic! I see we're returning a book from our fave author");
+    } else {
+        res.statusCode = 404;
+        res.write("Endpoint not found")
     }
     res.end();
 
@@ -28,5 +32,5 @@ const action = (req, res) => {
 const server = http.createServer(action);
 
 server.listen(5000, () => {
-    console.log("Server is running on port 5000");
+    console.log(`Server is running on http://${hostname}:${port}`);
 });
